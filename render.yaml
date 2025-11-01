@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: n8n-news-bot
+    env: docker
+    region: frankfurt # или ваш регион
+    plan: free # или starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    envVars:
+      - key: N8N_HOST
+        value: n8n-news-bot.onrender.com # замените на ваш URL
+      - key: WEBHOOK_TUNNEL_URL
+        value: https://n8n-news-bot.onrender.com
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        value: admin
+      - key: N8N_BASIC_AUTH_PASSWORD
+        sync: false # вы зададите значение вручную в Render
+      - key: N8N_ENCRYPTION_KEY
+        generateValue: true
